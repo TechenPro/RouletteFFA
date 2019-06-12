@@ -1,7 +1,7 @@
 {
-  "name": "react_skeleton",
+  "name": "poke-roulette",
   "version": "1.0.0",
-  "description": "Basic React-Bootsrapt Skeleton",
+  "description": "Roulette FFA Web App",
   "scripts": {
     "postinstall": "copy env.example.js env.js",
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TechenPro/React-Bootstrap-Skeleton.git"
+    "url": "https://github.com/TechenPro/RouletteFFA.git"
   },
   "keywords": [
     "es6",
