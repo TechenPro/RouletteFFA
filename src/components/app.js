@@ -26,7 +26,8 @@ class App extends Component {
         These parameters are accessed by the component as `props`.
         We can also have multiple of the same component type- each different from each other in the rendering process.
         */ }
-        <img src={'./assets/images/Borders/player-border.png'}/>
+        {/* <img src={'./assets/images/Borders/player-border.png'}/> */}
+        Hello, Working
       </div>
 
     );

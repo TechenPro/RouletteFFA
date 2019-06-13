@@ -1,27 +1,31 @@
-// Neccessary React Imports
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { Router, Route, Switch } from 'react-router-dom';
 
-//Pulls the main component into the site.
-import App from './components/app';
+import configureStore from './redux/configureStore';
 
-// Pulls main.scss into the site.
+
 import './style/main.scss';
 
+import history from './history';
+import App from './components/app';
+
+const store = configureStore();
 
 function main() {
-
   ReactDOM.render(
-
-    /* 
-    Renders the main component <App/> into the app-wrapper <div>
-    Note how the `App` component is added like a custom HTML tag.
-    */
-
-    <App />
+    <Provider store={store}>
+      <Router history={history}>
+        <Switch>
+          <Route path='/' exact component={App}/>
+          <Route path='/settings' component={App}/>
+          <Route path='/roulette' component={App}/>
+        </Switch>
+      </Router>
+    </Provider>
+    // <App/>
     , document.querySelector('.app-wrapper'));
-    
 }
 
-// Runs the main() function once the ReactDOM has loaded.
 document.addEventListener('DOMContentLoaded', main);
