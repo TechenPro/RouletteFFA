@@ -5,9 +5,6 @@ import ReactDOM from 'react-dom';
 //Pulls the main component into the site.
 import App from './components/app';
 
-// Default styles of bootstrap.
-// import 'bootstrap/dist/css/bootstrap.css';
-
 // Pulls main.scss into the site.
 import './style/main.scss';
 

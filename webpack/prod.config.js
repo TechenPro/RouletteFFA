@@ -1,15 +1,15 @@
 const path = require('path');
 const webpackMerge = require('webpack-merge');
-const autoprefixer = require('autoprefixer');
 const webpackCommon = require('./common.config');
 
 // webpack plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
 module.exports = webpackMerge(webpackCommon, {
@@ -18,6 +18,34 @@ module.exports = webpackMerge(webpackCommon, {
 
   devtool: 'source-map',
   mode: 'production',
+
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions:{
+          warnings: false,
+          ie8: true,
+          magle: true,
+        }
+      }), 
+      new OptimizeCSSAssetsPlugin({})
+    ],
+
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.s?css$/,
+          chunks: 'all',
+          minChunks: 1,
+          reuseExistingChunk: true,
+          enforce: true,
+        }
+      }
+    }
+  },
+
   output: {
 
     path: path.resolve(__dirname, '../dist'),
@@ -36,36 +64,33 @@ module.exports = webpackMerge(webpackCommon, {
     rules: [
       {
         test: /\.s?css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true,
-                sourceMap: true,
-                importLoaders: 2
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                config: {
-                  path: path.resolve(__dirname, 'postcss.config.js')
-                },
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                outputStyle: 'expanded',
-                sourceMap: true,
-                sourceMapContents: true
-              }
+        use: [
+          MiniCSSExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            // options:{
+            //   sourceMap: true,
+            //   importLoader: 2,
+            //   modules: true
+            // }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                require('autoprefixer')
+              ],
+              sourceMap: true
             }
-          ]
-        })
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              sourceMapContents: true
+            }
+          }
+        ]
       }
     ]
 
@@ -89,37 +114,26 @@ module.exports = webpackMerge(webpackCommon, {
         minifyURLs: true
       }
     }),
-    new CopyWebpackPlugin([
-      {from: path.resolve(__dirname, '../static')}
-    ], {
-      ignore: ['index.html', 'favicon.ico']
-    }),
-    new CleanWebpackPlugin(['dist'], {
-      root: path.resolve(__dirname, '..'),
-      exclude: '.gitignore'
-    }),
+
+    // new CopyWebpackPlugin([
+    //   {from: path.resolve(__dirname, '../static')}
+    // ], {
+    //   ignore: ['index.html', 'favicon.ico']
+    // }),
+
+    new CleanWebpackPlugin(),
+
     new DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
       }
     }),
-    new ExtractTextPlugin('[name]-[chunkhash].min.css'),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          ie8: true,
-          warnings: false
-        },
-        mangle: {
-          ie8: true
-        },
-        output: {
-          comments: false,
-          ie8: true
-        }
-      },
-      sourceMap: true
+
+    new MiniCSSExtractPlugin({
+      filename: "style.css",
+      chunkFilename: "[name].css"
     }),
+    
     new LoaderOptionsPlugin({
       options: {
         context: '/',

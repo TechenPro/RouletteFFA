@@ -5,7 +5,6 @@ const webpackCommon = require('./common.config');
 const env = require('../env');
 const proxyRules = require('../proxy/rules');
 
-// webpack plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');

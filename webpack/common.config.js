@@ -1,10 +1,7 @@
-// webpack plugins
-const SplitChunksPlugin = require('webpack/lib/optimize/SplitChunksPlugin');
 
 module.exports = {
   entry: {
-    app: ['./src/bootstrap.js'],
-    vendor: './src/vendor.js',
+    app: ['./src/bootstrap.js']
   },
 
   resolve: {
@@ -35,13 +32,15 @@ module.exports = {
         test: /\.(mp4|webm)$/,
         loader: 'url?limit=10000',
       },
+
+      {
+        test: /\.(csv|tsv)$/,
+        loader: 'csv-loader',
+        options: {
+          name: '[path][name].[ext]',
+          publicPath: '/'
+        }
+      }
     ],
   },
-
-  plugins: [
-    new SplitChunksPlugin({
-      name: ['app', 'vendor'],
-      minChunks: Infinity,
-    }),
-  ],
 };
