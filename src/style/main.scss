@@ -1,14 +1,12 @@
-// This imports another scss file to bring all of that file's styles into this one.
-// Any variables, mixins, or keyframes in the imported files are brought along as well.
-@import 'header';
+//imports
+@import 'gamepage';
 
-// Styling is done with the same syntax as vanilla CSS3.
+
 html {
     font-size: 62.5%; // 1rem is 10px
+    height: 100%;
 }
 
-// * is a wildcard selector that selects every tag within its scope.
-// Since this isn't nested, * selects every tag in the site.
 *,
 *::after,
 *::before {
@@ -19,6 +17,7 @@ html {
 }
 
 body {
+    height: 100%;
     overflow-x: hidden;
     font-weight: normal;
 
@@ -28,8 +27,15 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-.app {
-    margin-top: 2rem;
-    display: grid;
-    justify-items: center;
+.app-wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    z-index: -10;
+    background: radial-gradient(#212121, black);
+
+    // overflow-y: auto;
+    display: inline-block;
+
 }

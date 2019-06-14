@@ -1,0 +1,88 @@
+@mixin top-grid {
+    grid-template-rows: [text-s image-s] 1fr [text-e chip-s] 2fr [chip-e image-e];
+}
+
+@mixin left-grid {
+    grid-template-columns: [image-s] 1fr [image-e chip-s text-s] 3.5fr [chip-e text-e];
+    grid-column-gap: 2%;
+}
+
+@mixin bottom-grid {
+    grid-template-rows: [chip-s image-s] 2fr [chip-e text-s] 1fr [text-e image-e];
+}
+
+@mixin right-grid {
+
+    grid-template-columns: [chip-s text-s] 3.5fr [chip-e text-e image-s] 1fr [image-e];
+    grid-column-gap: 2%;
+}
+
+// Player Container Setup
+div[class*="player-container-"] {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: grid;
+
+    &:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url('../../static/assets/images/Borders/player-area.png');
+        background-size: 100% 100%;
+        z-index: -1;
+    }
+}
+
+.player-container-1 {
+    grid-area: player1;
+    @include left-grid();
+    @include top-grid();
+}
+
+.player-container-2 {
+    grid-area: player2;
+    @include right-grid();
+    @include top-grid();
+
+    &:before{
+        transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+    }
+}
+
+.player-container-3 {
+    grid-area: player3;
+    @include left-grid();
+    @include bottom-grid();
+    
+    &:before {
+        transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+    }
+}
+
+.player-container-4 {
+    grid-area: player4;
+    @include right-grid();
+    @include bottom-grid();
+    
+    &:before {
+        transform: scale(-1, -1);
+        -webkit-transform: scale(-1, -1);
+    }
+}
+
+.chipArea {
+    grid-row: chip-s/chip-e;
+    grid-column: chip-s/chip-e;
+    width: 80%;
+    height: 100%;
+    position: relative;
+    justify-self: center;
+    background-color: green;
+
+    display: flex;
+    justify-content: space-between;
+}

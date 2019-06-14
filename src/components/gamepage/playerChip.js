@@ -7,10 +7,17 @@ export default class Chip extends Component {
 
         this.state = {
             rolling: false,
-            currentPokemonID: 1
+            currentPokemonID: 1,
+            currentImageID: 1
         };
 
-        this.imageURL = url(`./assets/images/Chips/${props.color}.png`);
+        this.imageURL = `./assets/images/Chips/${props.color}.png`;
+    }
+
+    handleClick = function(playerID, numberID){
+        this.setState({rolling: true});
+        console.log(`Player: ${playerID} Chip: ${numberID}`);
+        setTimeout(()=>{this.setState({rolling: false}, () => {clearInterval(this.intervalID)})}, 4000);
     }
 
     render(){
@@ -25,7 +32,11 @@ export default class Chip extends Component {
                 />
                 <img
                     className={`chip-pokemon-image`}
+                    src={`./assets/images/SpriteResources/${this.state.currentImageID}.png`}
                 />
+                {this.state.rolling ? null : 
+                    <a onClick={() => {this.handleClick(playerID, numberID)}}/>
+                }
             </div>
         )
     }
