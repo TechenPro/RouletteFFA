@@ -10,24 +10,19 @@ class PlayerArea extends Component{
 
       <div className={`player-container-${id}`}>
 
-          {/* <div className={`player-imageHolder${id < 3 ? '' : '_bottom'}`}>
-            
-            <div className='player-image'>
-              <img className='player-image_border' src={require('../../assets/player-border.png')}/>
-              <img className = 'player-image_image' src = {`https://fillmurray.com/50/50`} id={`player-image-${id}`}/>
+          <div className='playerImagesWrapper'>
+            <div className={`playerImageContainer`}>
             </div>
 
-            <div className='card'>
-              <img className='card_border' src={'./assets/images/Borders/card-border.png'}/>
-              <img className = 'card_image' src = {`https://fillmurray.com/60/60`}/>
+            <div className={`playerCardContainer`}>
             </div>
           </div>
+          
 
-          <div className={`playerName${id % 2 ? '' : '_reverse'} ${id < 3 ? 'playerName_top' : 'playerName_bottom'}`}>
-            {`${name}`}
-          </div> */}
+          <div className={`playerName`}>
+          </div>
 
-          <div className={`chipArea`}>
+          <div className={`chipArea${id % 2 ? '' : '_reverse'}`}>
             {/* <Chip
             playerID = {id}
             numberID = {'1'}
@@ -54,3 +49,14 @@ class PlayerArea extends Component{
 }
 
 export default PlayerArea;
+
+
+ /* <div className='player-image'>
+      <img className='player-image_border' src={'assets/images/Borders/player-border.png'}/>
+      <img className = 'player-image_image' src = {`https://fillmurray.com/50/50`} id={`player-image-${id}`}/>
+    </div>
+
+    <div className='card'>
+      <img className='card_border' src={'./assets/images/Borders/card-border.png'}/>
+      <img className = 'card_image' src = {`https://fillmurray.com/60/60`}/>
+    </div> */

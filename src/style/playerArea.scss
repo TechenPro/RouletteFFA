@@ -1,24 +1,22 @@
 @mixin top-grid {
-    grid-template-rows: [text-s image-s] 1fr [text-e chip-s] 2fr [chip-e image-e];
+    grid-template-rows: 0.2132fr 0.0305fr 0.5635fr 0.1929fr;
 }
 
 @mixin left-grid {
-    grid-template-columns: [image-s] 1fr [image-e chip-s text-s] 3.5fr [chip-e text-e];
-    grid-column-gap: 2%;
+    grid-template-columns: 0.2472fr 0.0472fr 0.4833fr 0.2222fr;
 }
 
 @mixin bottom-grid {
-    grid-template-rows: [chip-s image-s] 2fr [chip-e text-s] 1fr [text-e image-e];
+    grid-template-rows: 0.1929fr 0.5635fr 0.0305fr 0.2132fr;
 }
 
 @mixin right-grid {
 
-    grid-template-columns: [chip-s text-s] 3.5fr [chip-e text-e image-s] 1fr [image-e];
-    grid-column-gap: 2%;
+    grid-template-columns: 0.2222fr 0.4833fr 0.0472fr 0.2472fr;
 }
 
 // Player Container Setup
-div[class*="player-container-"] {
+[class^="player-container-"] {
     width: 100%;
     height: 100%;
     position: relative;
@@ -37,12 +35,23 @@ div[class*="player-container-"] {
 
 .player-container-1 {
     grid-area: player1;
+
+    grid-template-areas: 
+        "images name name ."
+        "images . . ."
+        "images . chips chips"
+        ". . chips chips";
     @include left-grid();
     @include top-grid();
 }
 
 .player-container-2 {
     grid-area: player2;
+    grid-template-areas: 
+        ". name name images"
+        ". . . images"
+        "chips chips . images"
+        "chips chips . .";
     @include right-grid();
     @include top-grid();
 
@@ -54,6 +63,11 @@ div[class*="player-container-"] {
 
 .player-container-3 {
     grid-area: player3;
+    grid-template-areas:
+        ". . chips chips"
+        "images . chips chips"
+        "images . . ."
+        "images name name .";
     @include left-grid();
     @include bottom-grid();
     
@@ -65,6 +79,11 @@ div[class*="player-container-"] {
 
 .player-container-4 {
     grid-area: player4;
+    grid-template-areas: 
+        "chips chips . ."
+        "chips chips . images"
+        ". . . images"
+        ". name name images";
     @include right-grid();
     @include bottom-grid();
     
@@ -74,15 +93,53 @@ div[class*="player-container-"] {
     }
 }
 
-.chipArea {
-    grid-row: chip-s/chip-e;
-    grid-column: chip-s/chip-e;
-    width: 80%;
+// Chip Area Setup
+[class^='chipArea'] {
+    grid-area: chips;
+    width: 100%;
     height: 100%;
     position: relative;
-    justify-self: center;
-    background-color: green;
+    justify-self: end;
+    background-color: rgba(lime, 0.2);
 
     display: flex;
     justify-content: space-between;
+}
+
+.chipArea_reverse {
+    justify-self: start;
+}
+
+// // Player Images Setup
+// .playerImageContainer {
+//     grid-area: player;
+//     height: 100%;
+//     width: 100%;
+//     position: relative;
+//     background-color: rgba(blue, 0.2);
+// }
+
+// //Player Card Setup
+// .playerCardContainer {
+//     grid-area: card;
+//     height: 100%;
+//     width: 100%;
+//     position: relative;
+//     background-color: rgba(yellow, 0.2);
+// }
+
+.playerImagesWrapper {
+    grid-area: images;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-color: rgba(blue, 0.2);
+}
+
+.playerName {
+    grid-area: name;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-color: rgba(red, 0.2);
 }

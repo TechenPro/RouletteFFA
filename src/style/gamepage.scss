@@ -9,8 +9,8 @@
         "player1 . player2"
         ". . ."
         "player3 . player4";
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 2fr .5fr 2fr;
+    grid-template-rows: 2fr .25fr 2fr;
+    grid-template-columns: 6fr 1fr 6fr;
     position: relative;
 }
 
