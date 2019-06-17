@@ -11,24 +11,37 @@ class PlayerArea extends Component{
       <div className={`player-container-${id}`}>
 
           <div className='playerImagesWrapper'>
+
             <div className={`playerImageContainer`}>
+              <img className="playerImageBorder" src="./assets/images/Borders/player-border.png"/>
             </div>
 
             <div className={`playerCardContainer`}>
+              <img className="cardBorder" src="./assets/images/Borders/card-border.png"/>
             </div>
           </div>
           
 
           <div className={`playerName`}>
+            <span className="gradientText">Name</span>
           </div>
 
-          <div className={`chipArea${id % 2 ? '' : '_reverse'}`}>
+          <div className={`chipArea`}>
             {/* <Chip
             playerID = {id}
             numberID = {'1'}
             color = {`${color}`}
             pokemonID = {pokemon1}
             /> */}
+            <div className="chip chip1">
+              <img className="chipImage" src="./assets/images/Chips/orange.png"/>
+            </div>
+            <div className="chip chip2">
+              <img className="chipImage" src="./assets/images/Chips/orange.png"/>
+            </div>
+            <div className="chip chip3">
+              <img className="chipImage" src="./assets/images/Chips/orange.png"/>
+            </div>
             {/* <Chip
             playerID = {id}
             numberID = {'2'}

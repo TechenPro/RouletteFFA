@@ -25,7 +25,7 @@ export default class Chip extends Component {
         const {playerID, numberID} = this.props;
 
         return(
-            <div className={`chip chip-${numberID}${playerID % 2 ? '-reverse' : ''}`}>
+            <div className={`chip chip-${numberID}`}>
                 <img
                     className='chip-image'
                     src={this.imageURL}
